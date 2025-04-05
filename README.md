@@ -14,8 +14,18 @@ Repozytorium zawiera projekty realizowane w ramach ćwiczeń laboratoryjnych z p
   - **`Program.cs`**: Główna logika programu, implementacja klas `Ciasto`, fabryk (`FabrykaCiastaCzekoladowego`, `FabrykaCiastaJabłkowego`) oraz klasy `PlanPieczenia`.
   - **`Ciasto.csproj`**: Plik projektu .NET.
 
+- **`SystemObsługującyProdukcjęPaczek/`**  
+  Projekt demonstrujący zastosowanie wzorca projektowego **Singleton** do zarządzania produkcją paczek.  
+  - **`Program.cs`**: Główna logika programu, implementacja interfejsu `IPaczka`, fabryk (`FabrykaMałychPaczek`, `FabrykaDużychPaczek`) oraz klasy `ZarządzaniePaczkami`.
+  - **`SystemObsługującyProdukcjęPaczek.csproj`**: Plik projektu .NET.
+
+- **`SystemZarządzaniaPrzesyłkami/`**  
+  Projekt ilustrujący zastosowanie wzorca projektowego **Fabryka Abstrakcyjna** do zarządzania przesyłkami.  
+  - **`Program.cs`**: Główna logika programu, implementacja interfejsów `IPaczka`, `IKurier`, fabryk (`FabrykaLogistykiPolska`, `FabrykaLogistykiUSA`) oraz klasy `ZarządzaniePrzesyłkami`.
+  - **`SystemZarządzaniaPrzesyłkami.csproj`**: Plik projektu .NET.
+
 - **`Programowanie zaawansowane.sln`**  
-  Plik rozwiązania Visual Studio, łączący oba projekty (`Ciasto` i `NPC`).
+  Plik rozwiązania Visual Studio, łączący wszystkie projekty (`Ciasto`, `NPC`, `SystemObsługującyProdukcjęPaczek`, `SystemZarządzaniaPrzesyłkami`).
 
 - **`.gitignore`**  
   Plik konfiguracyjny ignorujący pliki tymczasowe i wygenerowane przez Visual Studio.
@@ -42,6 +52,14 @@ Repozytorium zawiera projekty realizowane w ramach ćwiczeń laboratoryjnych z p
      ```bash
      cd Ciasto
      ```
+   - Aby uruchomić projekt `SystemObsługującyProdukcjęPaczek`, przejdź do folderu `SystemObsługującyProdukcjęPaczek`:
+     ```bash
+     cd SystemObsługującyProdukcjęPaczek
+     ```
+   - Aby uruchomić projekt `SystemZarządzaniaPrzesyłkami`, przejdź do folderu `SystemZarządzaniaPrzesyłkami`:
+     ```bash
+     cd SystemZarządzaniaPrzesyłkami
+     ```
 
 3. Zbuduj projekt za pomocą polecenia `dotnet build`:
    ```bash
@@ -60,7 +78,7 @@ Repozytorium zawiera projekty realizowane w ramach ćwiczeń laboratoryjnych z p
 
 ## Cele Edukacyjne
 
-- Zrozumienie i implementacja wzorców projektowych, takich jak **Fabryka**.
+- Zrozumienie i implementacja wzorców projektowych, takich jak **Fabryka**, **Fabryka Abstrakcyjna**, **Singleton**.
 - Praktyczne zastosowanie programowania obiektowego w języku C#.
 - Organizacja kodu w projektach .NET.
 
@@ -131,6 +149,185 @@ Twoim zadaniem jest stworzenie systemu zarządzania planem pieczenia ciast w cuk
    - Utwórz obiekt `PlanPieczenia` używając `var`.
    - Dodaj co najmniej dwie różne wariacje ciast za pomocą różnych fabryk.
    - Wyświetl plan pieczenia za pomocą pętli `foreach` i użyj metody `WyświetlPlan` na obiekcie `PlanPieczenia`.
+
+---
+
+### Zadanie nr 3: System obsługujący produkcję paczek
+
+System obsługujący produkcję różnych rodzajów paczek w fabryce logistycznej. Twoim zadaniem jest zaimplementowanie wzorca Factory Method z użyciem Singleton’a.
+
+1. Interfejs Produktu:
+   - Zdefiniuj interfejs `IPaczka` z metodą `Przygotuj()`.
+
+2. Konkretne Implementacje Produktów:
+   - Stwórz kilka konkretnych implementacji produktów, takich jak `MałaPaczka`, `DużaPaczka`, implementujących interfejs `IPaczka`.
+
+   Przykładowo:
+   ```csharp
+   class MałaPaczka : IPaczka
+   {
+      public void Przygotuj()
+      {
+         Console.WriteLine("Przygotowano małą paczkę.");
+      }
+   }
+   ```
+
+3. Singleton dla Zarządzania Produkcją:
+   - Zaimplementuj Singleton, który będzie zarządzał procesem produkcji paczek.
+   - Wprowadź metodę, która pozwoli na przekazanie konkretnej fabryki paczek.
+
+   Kilka kluczowych punktów w implementacji Singleton’a:
+   - **Prywatny Konstruktor**: Dostęp do konstruktora klasy jest ograniczony do samej klasy, co oznacza, że nie można utworzyć nowej instancji z zewnątrz.
+   - **Pole Instancji**: Jest to prywatne pole przechowujące jedyną instancję klasy.
+   - **Właściwość Instancji**: To publiczna właściwość, która umożliwia dostęp do instancji klasy. Jeśli instancja nie istnieje, jest tworzona w momencie pierwszego dostępu.
+
+   Przykład:
+   ```csharp
+   class ZarządzaniePaczkami
+   {
+      private IFabrykaPaczek fabrykaPaczek;
+      private static ZarządzaniePaczkami _instancja;
+      private ZarządzaniePaczkami() { }
+      public static ZarządzaniePaczkami Instancja
+      {
+         get
+         {
+               if (_instancja == null)
+               {
+                  _instancja = new ZarządzaniePaczkami();
+               }
+               return _instancja;
+         }
+      }
+   }
+   ```
+
+4. Konkretne Kreatory:
+   - Stwórz kilka konkretnych implementacji kreatorów, np. `FabrykaMałychPaczek`, `FabrykaDużychPaczek`, implementujących interfejs `IFabrykaPaczek`.
+
+   Przykład:
+   ```csharp
+   interface IFabrykaPaczek
+   {
+      IPaczka UtwórzPaczkę();
+   }
+   ```
+
+   - W każdym kreatorze zaimplementuj wzorzec Factory Method, który będzie odpowiedzialny za tworzenie konkretnej paczki.
+
+   Przykład:
+   ```csharp
+   class FabrykaDużychPaczek : IFabrykaPaczek
+   {
+      public IPaczka UtwórzPaczkę()
+      {
+         return new DużaPaczka();
+      }
+   }
+   ```
+
+5. Testowanie:
+   - Wprowadź kilka zamówień, używając Singleton’a do zarządzania produkcją różnych paczek.
+
+---
+
+### Zadanie nr 4: System zarządzania przesyłkami
+
+Rozważ system zarządzania przesyłkami w międzynarodowej firmie logistycznej z różnymi rodzajami paczek i kurierów. Twoim zadaniem jest zaimplementowanie mechanizmu wyboru fabryki na podstawie lokalizacji klienta, wzorca Abstract Factory oraz Singleton’a.
+
+1. **Interfejsy i Implementacje Produktów**:
+   - Zdefiniuj interfejsy produktów: `IPaczka` z metodą `void Spakuj()` oraz `IKurier` z metodą `void Dostarcz()`.
+   - Stwórz konkretne implementacje produktów: `MałaPaczka`, `DużaPaczka`, `DHLKurier`, `UPSKurier`. W środku metod wypisz odpowiednie komunikaty:
+   ```csharp
+   Console.WriteLine("Spakowano dużą/małą paczkę.");
+   Console.WriteLine("Dostarczono przez kuriera DHL/UPS.");
+   ```
+
+2. **Interfejs dla Abstract Factory**:
+   - Określ interfejs `IFabrykaLogistyki` z dwiema metodami typu Factory Method:
+     - `IPaczka UtworzPaczkę()`
+     - `IKurier UtworzKuriera()`
+
+3. **Konkretne Implementacje Abstract Factory**:
+   - Utwórz konkretne fabryki dla różnych lokalizacji, np. `FabrykaLogistykiPolska`, `FabrykaLogistykiUSA`.
+
+4. **Singleton dla Zarządzania Przesyłkami**:
+   - Dodaj Singleton do klasy `ZarządzaniePrzesyłkami`, aby zapewnić, że istnieje tylko jedna instancja w całym systemie.
+
+   Przykład:
+   ```csharp
+   class ZarządzaniePrzesyłkami
+   {
+       private IFabrykaLogistyki fabrykaLogistyki;
+       private static ZarządzaniePrzesyłkami _instancja;
+       private ZarządzaniePrzesyłkami() { }
+       public static ZarządzaniePrzesyłkami Instancja
+       {
+           get
+           {
+               if (_instancja == null)
+               {
+                   _instancja = new ZarządzaniePrzesyłkami();
+               }
+               return _instancja;
+           }
+       }
+   }
+   ```
+
+5. **Metoda Przyjmująca Zamówienie**:
+   - W klasie `ZarządzaniePrzesyłkami`, stwórz metodę `PrzyjmijZamówienie(string lokalizacja)`.
+   - W metodzie dokonaj wyboru fabryki na podstawie lokalizacji klienta.
+
+   Przykład:
+   ```csharp
+   if (lokalizacja == "Polska")
+   {
+      fabrykaLogistyki = new FabrykaLogistykiPolska();
+   }
+   ```
+
+   - Użyj Abstract Factory do stworzenia paczki i kuriera.
+   - Wywołaj metody `Spakuj()` i `Dostarcz()` na produktach.
+
+   Przykład:
+   ```csharp
+   public enum Lokalizacja
+   {
+      Polska,
+      USA
+   }
+   public void PrzyjmijZamówienie(Lokalizacja lokalizacja)
+   {
+      switch (lokalizacja)
+      {
+         case Lokalizacja.Polska:
+            fabrykaLogistyki = new FabrykaLogistykiPolska();
+            break;
+         case Lokalizacja.USA:
+            fabrykaLogistyki = new FabrykaLogistykiUSA();
+            break;
+         default:
+            throw new ArgumentException("Nieobsługiwana lokalizacja.");
+      }
+      var paczka = fabrykaLogistyki.UtworzPaczkę();
+      var kurier = fabrykaLogistyki.UtworzKuriera();
+      paczka.Spakuj();
+      kurier.Dostarcz();
+   }
+   ```
+
+6. **Wybór Fabryki**:
+   - Wprowadź możliwość wyboru fabryki na podstawie lokalizacji klienta.
+
+   Przykład:
+   ```csharp
+   ZarządzaniePrzesyłkami.Instancja.PrzyjmijZamówienie("Polska");
+   ```
+
+7. **Testowanie**:
+   - Przetestuj implementację, tworząc kilka zamówień dla różnych lokalizacji z różnymi paczkami i kurierami.
 
 ## Autorzy
 
