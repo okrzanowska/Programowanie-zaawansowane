@@ -1,0 +1,26 @@
+[
+  {
+    "Imie": "Jan",
+    "Nazwisko": "Kowalski",
+    "Wiek": 30,
+    "DataUrodzenia": "1994-05-15T00:00:00"
+  },
+  {
+    "Imie": "Anna",
+    "Nazwisko": "Nowak",
+    "Wiek": 25,
+    "DataUrodzenia": "1999-03-10T00:00:00"
+  },
+  {
+    "Imie": "Adam",
+    "Nazwisko": "Wi\u015Bniewski",
+    "Wiek": 40,
+    "DataUrodzenia": "1984-11-23T00:00:00"
+  },
+  {
+    "Imie": "Julia",
+    "Nazwisko": "Kwa\u015Bniewska",
+    "Wiek": 30,
+    "DataUrodzenia": "1994-11-23T00:00:00"
+  }
+]

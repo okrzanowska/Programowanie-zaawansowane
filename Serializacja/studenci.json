@@ -1,0 +1,34 @@
+[
+  {
+    "NumerIndeksu": "12345",
+    "NumerGrupy": "INF-1",
+    "Imie": "Marek",
+    "Nazwisko": "Kowalczyk",
+    "Wiek": 22,
+    "DataUrodzenia": "2002-07-12T00:00:00"
+  },
+  {
+    "NumerIndeksu": "67890",
+    "NumerGrupy": "INF-2",
+    "Imie": "Alicja",
+    "Nazwisko": "Zieli\u0144ska",
+    "Wiek": 21,
+    "DataUrodzenia": "2003-04-18T00:00:00"
+  },
+  {
+    "NumerIndeksu": "54321",
+    "NumerGrupy": "INF-3",
+    "Imie": "Piotr",
+    "Nazwisko": "D\u0105browski",
+    "Wiek": 23,
+    "DataUrodzenia": "2001-09-05T00:00:00"
+  },
+  {
+    "NumerIndeksu": "09876",
+    "NumerGrupy": "INF-1",
+    "Imie": "Karolina",
+    "Nazwisko": "Lewandowska",
+    "Wiek": 20,
+    "DataUrodzenia": "2004-02-28T00:00:00"
+  }
+]

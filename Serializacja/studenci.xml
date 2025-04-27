@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Student>
+    <Imie>Marek</Imie>
+    <Nazwisko>Kowalczyk</Nazwisko>
+    <Wiek>22</Wiek>
+    <DataUrodzenia>2002-07-12T00:00:00</DataUrodzenia>
+    <NumerIndeksu>12345</NumerIndeksu>
+    <NumerGrupy>INF-1</NumerGrupy>
+  </Student>
+  <Student>
+    <Imie>Alicja</Imie>
+    <Nazwisko>Zielińska</Nazwisko>
+    <Wiek>21</Wiek>
+    <DataUrodzenia>2003-04-18T00:00:00</DataUrodzenia>
+    <NumerIndeksu>67890</NumerIndeksu>
+    <NumerGrupy>INF-2</NumerGrupy>
+  </Student>
+  <Student>
+    <Imie>Piotr</Imie>
+    <Nazwisko>Dąbrowski</Nazwisko>
+    <Wiek>23</Wiek>
+    <DataUrodzenia>2001-09-05T00:00:00</DataUrodzenia>
+    <NumerIndeksu>54321</NumerIndeksu>
+    <NumerGrupy>INF-3</NumerGrupy>
+  </Student>
+  <Student>
+    <Imie>Karolina</Imie>
+    <Nazwisko>Lewandowska</Nazwisko>
+    <Wiek>20</Wiek>
+    <DataUrodzenia>2004-02-28T00:00:00</DataUrodzenia>
+    <NumerIndeksu>09876</NumerIndeksu>
+    <NumerGrupy>INF-1</NumerGrupy>
+  </Student>
+</ArrayOfStudent>
