@@ -24,8 +24,15 @@ Repozytorium zawiera projekty realizowane w ramach ćwiczeń laboratoryjnych z p
   - **`Program.cs`**: Główna logika programu, implementacja interfejsów `IPaczka`, `IKurier`, fabryk (`FabrykaLogistykiPolska`, `FabrykaLogistykiUSA`) oraz klasy `ZarządzaniePrzesyłkami`.
   - **`SystemZarządzaniaPrzesyłkami.csproj`**: Plik projektu .NET.
 
+- **`Serializacja/`**  
+  Projekt demonstracyjny pokazujący techniki serializacji i deserializacji obiektów w C#.
+  - **`Program.cs`**: Główna logika programu, implementacja klas `Osoba` i `Student` oraz metody serializacji/deserializacji do formatu XML i JSON.
+  - **`osoby.xml`**, **`osoby.json`**: Pliki wynikowe serializacji obiektów klasy `Osoba`.
+  - **`studenci.xml`**, **`studenci.json`**: Pliki wynikowe serializacji obiektów klasy `Student`.
+  - **`Serializacja.csproj`**: Plik projektu .NET.
+
 - **`Programowanie zaawansowane.sln`**  
-  Plik rozwiązania Visual Studio, łączący wszystkie projekty (`Ciasto`, `NPC`, `SystemObsługującyProdukcjęPaczek`, `SystemZarządzaniaPrzesyłkami`).
+  Plik rozwiązania Visual Studio, łączący wszystkie projekty (`Ciasto`, `NPC`, `SystemObsługującyProdukcjęPaczek`, `SystemZarządzaniaPrzesyłkami`, `Serializacja`).
 
 - **`.gitignore`**  
   Plik konfiguracyjny ignorujący pliki tymczasowe i wygenerowane przez Visual Studio.
@@ -60,6 +67,10 @@ Repozytorium zawiera projekty realizowane w ramach ćwiczeń laboratoryjnych z p
      ```bash
      cd SystemZarządzaniaPrzesyłkami
      ```
+   - Aby uruchomić projekt `Serializacja`, przejdź do folderu `Serializacja`:
+     ```bash
+     cd Serializacja
+     ```
 
 3. Zbuduj projekt za pomocą polecenia `dotnet build`:
    ```bash
@@ -80,6 +91,7 @@ Repozytorium zawiera projekty realizowane w ramach ćwiczeń laboratoryjnych z p
 
 - Zrozumienie i implementacja wzorców projektowych, takich jak **Fabryka**, **Fabryka Abstrakcyjna**, **Singleton**.
 - Praktyczne zastosowanie programowania obiektowego w języku C#.
+- Implementacja mechanizmów serializacji i deserializacji obiektów do formatów XML oraz JSON.
 - Organizacja kodu w projektach .NET.
 
 ## Zadania
@@ -328,6 +340,45 @@ Rozważ system zarządzania przesyłkami w międzynarodowej firmie logistycznej 
 
 7. **Testowanie**:
    - Przetestuj implementację, tworząc kilka zamówień dla różnych lokalizacji z różnymi paczkami i kurierami.
+
+---
+
+### Zadanie nr 5: Serializacja
+
+Napisz prostą aplikację, która będzie serializować obiekty do formatów XML i JSON.
+
+1. **Definicja klas**:
+   - Zdefiniuj klasę bazową `Osoba` zawierającą pola `Imie`, `Nazwisko`, `Wiek` i `DataUrodzenia` jako typ zmiennych `DateTime`.
+   - Utwórz klasę pochodną `Student`, która dziedziczy po klasie `Osoba` i dodaj do niej dodatkowe pola `NumerIndeksu` oraz `NumerGrupy`.
+
+2. **Tworzenie obiektów**:
+   - Utwórz co najmniej 4 obiekty klasy `Student` oraz klasy `Osoba` i zainicjuj je różnymi danymi.
+
+3. **Serializacja do XML**:
+   - Użyj mechanizmu serializacji do zapisania obiektów `Osoba` i `Student` do plików XML.
+
+4. **Serializacja do JSON**:
+   - Użyj mechanizmu serializacji do zapisania tych samych obiektów `Osoba` i `Student` do plików JSON.
+
+5. **Deserializacja i wyświetlanie**:
+   - Wczytaj dane z plików i wyświetl je na konsoli. 
+   
+   Oczekiwany wynik działania programu:
+
+   ```
+   Obiekty zostały zserializowane do pliku 'osoby.xml'.
+   Obiekty zostały zserializowane do pliku 'osoby.json'.
+
+   Dane wczytane z pliku XML:
+   Imię: Jan, Nazwisko: Kowalski, Wiek: 30
+   Imię: Anna, Nazwisko: Nowak, Wiek: 25
+   Imię: Adam, Nazwisko: Wiśniewski, Wiek: 40
+
+   Dane wczytane z pliku JSON:
+   Imię: Jan, Nazwisko: Kowalski, Wiek: 30
+   Imię: Anna, Nazwisko: Nowak, Wiek: 25
+   Imię: Adam, Nazwisko: Wiśniewski, Wiek: 40
+   ```
 
 ## Autorzy
 
